@@ -495,6 +495,16 @@
               <div class="count"><strong>11</strong><span>Harold</span></div>
               <div class="count"><strong>11</strong><span>Gerald</span></div>
             </div>
+
+            <h2 style="margin-top:18px;">Turni domenicali</h2>
+            <div class="counts">
+              <div class="count"><strong>2</strong><span>Martin</span></div>
+              <div class="count"><strong>2</strong><span>Reymark</span></div>
+              <div class="count"><strong>3</strong><span>Rico</span></div>
+              <div class="count"><strong>2</strong><span>Joshua</span></div>
+              <div class="count"><strong>3</strong><span>Harold</span></div>
+              <div class="count"><strong>3</strong><span>Gerald</span></div>
+            </div>
           </div>
         </section>
 
@@ -553,11 +563,12 @@
     const year = 2026;
     const month = 10; // Novembre: gennaio = 0
     const daysInMonth = new Date(year, month + 1, 0).getDate();
-    const firstWeekday = new Date(year, month, 1).getDay();
+    const firstWeekday = new Date(year, month, 1).getDay(); // Domenica = 0
 
     function renderCalendar() {
       grid.innerHTML = "";
 
+      // Celle vuote prima del primo giorno del mese.
       for (let i = 0; i < firstWeekday; i++) {
         const empty = document.createElement("div");
         empty.className = "day empty";
@@ -566,18 +577,16 @@
       }
 
       const now = new Date();
-      const isNovember2026 =
-        now.getFullYear() === year && now.getMonth() === month;
+      const isNovember2026 = now.getFullYear() === year && now.getMonth() === month;
 
       for (let date = 1; date <= daysInMonth; date++) {
         const weekday = new Date(year, month, date).getDay();
         const isSunday = weekday === 0;
         const isToday = isNovember2026 && now.getDate() === date;
-        const isHoliday = date === 1;
+        const isHoliday = date === 1; // Tutti i Santi: festa nazionale italiana
 
         const card = document.createElement("article");
         card.className = "day";
-
         if (isSunday) card.classList.add("sunday");
         if (isHoliday) card.classList.add("holiday");
         if (isToday) card.classList.add("today");
@@ -626,10 +635,10 @@
 
     renderCalendar();
 
+    // Aggiorna il contrassegno "Oggi" quando la pagina torna in primo piano.
     document.addEventListener("visibilitychange", () => {
       if (!document.hidden) renderCalendar();
     });
-
     window.addEventListener("focus", renderCalendar);
   </script>
 </body>
