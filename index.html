@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#12345a">
+
+  <title>Servizio Cucina – Novembre 2026</title>
+  <meta name="description" content="Calendario dei turni del servizio cucina della comunità FSMI per novembre 2026.">
+
+  <!--
+    SOCIAL PREVIEW:
+    After publishing on GitHub Pages, replace the placeholder URL below
+    with the full public URL of your preview image (1200 x 630 px).
+    Example: https://USERNAME.github.io/REPOSITORY/preview.png
+  -->
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="it_IT">
+  <meta property="og:title" content="Servizio Cucina – Novembre 2026">
+  <meta property="og:description" content="Calendario dei turni del servizio cucina della comunità FSMI.">
+  <meta property="og:image" content="https://YOUR-USERNAME.github.io/YOUR-REPOSITORY/preview.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Servizio Cucina – Novembre 2026">
+  <meta name="twitter:description" content="Calendario dei turni del servizio cucina della comunità FSMI.">
+  <meta name="twitter:image" content="https://YOUR-USERNAME.github.io/YOUR-REPOSITORY/preview.png">
+
+  <style>
+    :root {
+      --navy: #12345a;
+      --navy-deep: #0c2746;
+      --blue: #1683c6;
+      --blue-soft: #eaf6ff;
+      --blue-pale: #f4faff;
+      --red: #c83d4b;
+      --red-soft: #fff0f1;
+      --ink: #24364a;
+      --muted: #718096;
+      --paper: #ffffff;
+      --page: #eef4f8;
+      --today: #1683c6;
+      --shadow: 0 10px 28px rgba(20, 48, 78, .08);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      padding: 28px 18px 36px;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at top left, rgba(74,174,232,.12), transparent 32rem),
+        var(--page);
+      font-family: Georgia, "Times New Roman", serif;
+    }
+
+    .page {
+      width: min(1120px, 100%);
+      margin: 0 auto;
+    }
+
+    .calendar-shell {
+      overflow: hidden;
+      background: var(--paper);
+      border-radius: 24px;
+      box-shadow: var(--shadow);
+    }
+
+    .hero {
+      position: relative;
+      padding: 30px 34px 27px;
+      color: white;
+      background: linear-gradient(125deg, var(--navy-deep), var(--navy) 62%, #1c5d8b);
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      width: 220px;
+      height: 220px;
+      right: -55px;
+      top: -115px;
+      border: 1px solid rgba(255,255,255,.13);
+      border-radius: 50%;
+      box-shadow: 0 0 0 22px rgba(255,255,255,.035),
+                  0 0 0 45px rgba(255,255,255,.025);
+      pointer-events: none;
+    }
+
+    .eyebrow {
+      margin: 0 0 8px;
+      color: #c5e8ff;
+      font-family: Arial, sans-serif;
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: .19em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      position: relative;
+      z-index: 1;
+      margin: 0;
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 600;
+      letter-spacing: .025em;
+      line-height: 1.05;
+    }
+
+    .subtitle {
+      position: relative;
+      z-index: 1;
+      margin: 11px 0 0;
+      color: #e1f2ff;
+      font-family: Arial, sans-serif;
+      font-size: .95rem;
+      letter-spacing: .04em;
+    }
+
+    .hero-mark {
+      position: absolute;
+      z-index: 1;
+      right: 34px;
+      bottom: 27px;
+      color: rgba(255,255,255,.9);
+      font-size: 2rem;
+    }
+
+    .content { padding: 24px 26px 26px; }
+
+    .legend {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 10px 20px;
+      margin: 0 0 18px;
+      font-family: Arial, sans-serif;
+      font-size: .78rem;
+      color: var(--muted);
+    }
+
+    .legend-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+    }
+
+    .legend-dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: var(--blue);
+    }
+
+    .legend-dot.red { background: var(--red); }
+
+    .legend-today {
+      width: 15px;
+      height: 15px;
+      border: 2px solid var(--today);
+      border-radius: 5px;
+      background: #f0f9ff;
+    }
+
+    .weekdays, .calendar-grid {
+      display: grid;
+      grid-template-columns: repeat(7, minmax(0, 1fr));
+      gap: 9px;
+    }
+
+    .weekdays { margin-bottom: 9px; }
+
+    .weekday {
+      padding: 7px 4px;
+      color: #728196;
+      text-align: center;
+      font-family: Arial, sans-serif;
+      font-size: .69rem;
+      font-weight: 700;
+      letter-spacing: .12em;
+    }
+
+    .weekday:first-child { color: var(--red); }
+
+    .day {
+      position: relative;
+      display: flex;
+      min-height: 125px;
+      flex-direction: column;
+      padding: 11px 10px 10px;
+      border-radius: 15px;
+      background: var(--blue-pale);
+      transition: transform .18s ease, box-shadow .18s ease;
+    }
+
+    .day.empty {
+      min-height: 0;
+      background: transparent;
+    }
+
+    .day.sunday, .day.holiday {
+      background: var(--red-soft);
+    }
+
+    .day.today {
+      z-index: 1;
+      outline: 3px solid var(--today);
+      outline-offset: 1px;
+      background: #e7f5ff;
+      box-shadow: 0 5px 18px rgba(22,131,198,.18);
+    }
+
+    .day.today.sunday, .day.today.holiday {
+      background: #ffe8eb;
+    }
+
+    .date-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 5px;
+      margin-bottom: 8px;
+    }
+
+    .date-number {
+      color: var(--blue);
+      font-family: Arial, sans-serif;
+      font-size: 1.12rem;
+      font-weight: 800;
+      line-height: 1;
+    }
+
+    .sunday .date-number, .holiday .date-number { color: var(--red); }
+
+    .today-label {
+      display: none;
+      padding: 3px 6px;
+      border-radius: 20px;
+      color: white;
+      background: var(--today);
+      font-family: Arial, sans-serif;
+      font-size: .54rem;
+      font-weight: 800;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+    }
+
+    .today .today-label { display: inline-block; }
+
+    .names {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      font-family: Arial, sans-serif;
+      font-size: .76rem;
+      font-weight: 600;
+      line-height: 1.25;
+    }
+
+    .name { color: #344a60; }
+
+    .celebration {
+      margin-top: auto;
+      padding-top: 8px;
+      color: #a63b48;
+      font-family: Arial, sans-serif;
+      font-size: .61rem;
+      font-style: italic;
+      line-height: 1.25;
+    }
+
+    .today .celebration { color: #96313e; }
+
+    .lower {
+      display: grid;
+      grid-template-columns: 1.25fr 1fr;
+      gap: 14px;
+      margin-top: 22px;
+    }
+
+    .info-panel {
+      padding: 17px 19px;
+      border-radius: 16px;
+      background: #f5f9fc;
+    }
+
+    .info-panel h2 {
+      margin: 0 0 12px;
+      color: var(--navy);
+      font-size: 1rem;
+      font-weight: 700;
+    }
+
+    .observance-list {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px 14px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      font-family: Arial, sans-serif;
+      font-size: .72rem;
+      line-height: 1.35;
+    }
+
+    .observance-list li strong { color: var(--red); }
+
+    .counts {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 9px;
+      font-family: Arial, sans-serif;
+    }
+
+    .count {
+      padding: 9px 7px;
+      border-radius: 11px;
+      background: white;
+      text-align: center;
+    }
+
+    .count strong {
+      display: block;
+      color: var(--blue);
+      font-size: 1.15rem;
+    }
+
+    .count span {
+      display: block;
+      margin-top: 3px;
+      color: #617286;
+      font-size: .68rem;
+    }
+
+    .footnote {
+      margin: 18px 2px 0;
+      color: #8a97a6;
+      text-align: center;
+      font-family: Arial, sans-serif;
+      font-size: .68rem;
+    }
+
+    .mobile-day-label { display: none; }
+
+    @media (max-width: 700px) {
+      body { padding: 10px; }
+      .calendar-shell { border-radius: 18px; }
+      .hero { padding: 24px 21px 22px; }
+      .hero-mark { right: 20px; bottom: 20px; font-size: 1.55rem; }
+      .content { padding: 18px 14px 20px; }
+      .weekdays, .calendar-grid { gap: 5px; }
+      .weekday {
+        padding: 5px 0;
+        font-size: .58rem;
+        letter-spacing: .02em;
+      }
+      .day {
+        min-height: 112px;
+        padding: 8px 6px 7px;
+        border-radius: 10px;
+      }
+      .date-number { font-size: .98rem; }
+      .names { gap: 4px; font-size: .64rem; }
+      .celebration { font-size: .54rem; }
+      .today-label { font-size: .46rem; padding: 2px 4px; }
+      .lower { grid-template-columns: 1fr; gap: 10px; }
+      .observance-list { font-size: .7rem; }
+    }
+
+    /* Phone list layout: keeps the dates in chronological order and readable. */
+    @media (max-width: 480px) {
+      body { padding: 7px; }
+      .hero { padding: 21px 18px; }
+      .hero-mark { display: none; }
+      .content { padding: 16px 12px 18px; }
+      .weekdays { display: none; }
+      .calendar-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 7px;
+      }
+      .day {
+        min-height: 0;
+        display: grid;
+        grid-template-columns: 55px minmax(0, 1fr);
+        grid-template-rows: auto auto;
+        column-gap: 10px;
+        align-items: start;
+        padding: 11px 12px;
+        border-radius: 12px;
+      }
+      .day.empty { display: none; }
+      .date-row {
+        grid-column: 1;
+        grid-row: 1 / span 2;
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 5px;
+        margin: 0;
+      }
+      .date-number { font-size: 1.25rem; }
+      .today-label { font-size: .5rem; }
+      .names {
+        grid-column: 2;
+        grid-row: 1;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 4px 12px;
+        padding-top: 1px;
+        font-size: .78rem;
+      }
+      .celebration {
+        grid-column: 2;
+        grid-row: 2;
+        margin-top: 5px;
+        padding-top: 0;
+        font-size: .66rem;
+      }
+      .day:not(:has(.celebration)) .names {
+        grid-row: 1 / span 2;
+        align-self: center;
+      }
+      .observance-list { grid-template-columns: 1fr; }
+    }
+
+    @media print {
+      @page { size: A4 landscape; margin: 7mm; }
+      body {
+        padding: 0;
+        background: white;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+      .page { width: 100%; max-width: none; }
+      .calendar-shell { border-radius: 0; box-shadow: none; }
+      .hero { padding: 17px 24px 15px; }
+      h1 { font-size: 2.25rem; }
+      .content { padding: 14px 18px 12px; }
+      .day { min-height: 94px; padding: 8px; }
+      .weekdays, .calendar-grid { gap: 6px; }
+      .lower { margin-top: 13px; gap: 10px; }
+      .info-panel { padding: 11px 14px; }
+      .footnote { margin-top: 9px; }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="page">
+    <section class="calendar-shell" aria-label="Calendario del servizio cucina novembre 2026">
+      <header class="hero">
+        <p class="eyebrow">Calendario della comunità</p>
+        <h1>Novembre 2026</h1>
+        <p class="subtitle">Servizio cucina</p>
+        <div class="hero-mark" aria-hidden="true">✦</div>
+      </header>
+
+      <div class="content">
+        <div class="legend" aria-label="Legenda">
+          <span class="legend-item"><span class="legend-dot red"></span>Domeniche e solennità</span>
+          <span class="legend-item"><span class="legend-dot"></span>Giorni ordinari</span>
+          <span class="legend-item"><span class="legend-today"></span>Oggi</span>
+        </div>
+
+        <div class="weekdays" aria-hidden="true">
+          <div class="weekday">DOM</div>
+          <div class="weekday">LUN</div>
+          <div class="weekday">MAR</div>
+          <div class="weekday">MER</div>
+          <div class="weekday">GIO</div>
+          <div class="weekday">VEN</div>
+          <div class="weekday">SAB</div>
+        </div>
+
+        <div class="calendar-grid" id="calendarGrid"></div>
+
+        <section class="lower">
+          <div class="info-panel">
+            <h2>Ricorrenze di novembre</h2>
+            <ul class="observance-list">
+              <li><strong>1</strong> – Tutti i Santi</li>
+              <li><strong>2</strong> – Commemorazione dei fedeli defunti</li>
+              <li><strong>4</strong> – Unità Nazionale e Forze Armate</li>
+              <li><strong>8</strong> – XXXII Domenica del Tempo Ordinario</li>
+              <li><strong>15</strong> – XXXIII Domenica del Tempo Ordinario</li>
+              <li><strong>22</strong> – Cristo Re dell’Universo</li>
+              <li><strong>29</strong> – I Domenica di Avvento</li>
+            </ul>
+          </div>
+
+          <div class="info-panel">
+            <h2>Distribuzione dei turni</h2>
+            <div class="counts">
+              <div class="count"><strong>11</strong><span>Martin</span></div>
+              <div class="count"><strong>11</strong><span>Reymark</span></div>
+              <div class="count"><strong>11</strong><span>Rico</span></div>
+              <div class="count"><strong>10</strong><span>Joshua</span></div>
+              <div class="count"><strong>11</strong><span>Harold</span></div>
+              <div class="count"><strong>11</strong><span>Gerald</span></div>
+            </div>
+          </div>
+        </section>
+
+        <p class="footnote">«Servite il Signore con gioia» · Calendario della comunità FSMI</p>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    "use strict";
+
+    const assignments = {
+      1:  ["Rico", "Harold", "Martin"],
+      2:  ["Joshua", "Gerald"],
+      3:  ["Martin", "Reymark"],
+      4:  ["Rico", "Harold"],
+      5:  ["Reymark", "Gerald"],
+      6:  ["Martin", "Harold"],
+      7:  ["Rico", "Joshua"],
+      8:  ["Reymark", "Harold", "Gerald"],
+      9:  ["Martin", "Joshua"],
+      10: ["Reymark", "Rico"],
+      11: ["Joshua", "Harold"],
+      12: ["Martin", "Rico"],
+      13: ["Reymark", "Gerald"],
+      14: ["Martin", "Harold"],
+      15: ["Rico", "Joshua", "Gerald"],
+      16: ["Reymark", "Harold"],
+      17: ["Rico", "Joshua"],
+      18: ["Martin", "Gerald"],
+      19: ["Reymark", "Joshua"],
+      20: ["Rico", "Gerald"],
+      21: ["Martin", "Harold"],
+      22: ["Reymark", "Rico", "Gerald"],
+      23: ["Joshua", "Harold"],
+      24: ["Martin", "Rico"],
+      25: ["Reymark", "Gerald"],
+      26: ["Martin", "Joshua"],
+      27: ["Harold", "Gerald"],
+      28: ["Reymark", "Joshua"],
+      29: ["Martin", "Rico", "Harold"],
+      30: ["Reymark", "Gerald"]
+    };
+
+    const celebrations = {
+      1:  "Tutti i Santi",
+      2:  "Commemorazione dei fedeli defunti",
+      4:  "Unità Nazionale e Forze Armate",
+      8:  "XXXII Domenica del Tempo Ordinario",
+      15: "XXXIII Domenica del Tempo Ordinario",
+      22: "Cristo Re dell’Universo",
+      29: "I Domenica di Avvento"
+    };
+
+    const grid = document.getElementById("calendarGrid");
+    const year = 2026;
+    const month = 10; // Novembre: gennaio = 0
+    const daysInMonth = new Date(year, month + 1, 0).getDate();
+    const firstWeekday = new Date(year, month, 1).getDay(); // Domenica = 0
+
+    function renderCalendar() {
+      grid.innerHTML = "";
+
+      // Celle vuote prima del primo giorno del mese.
+      for (let i = 0; i < firstWeekday; i++) {
+        const empty = document.createElement("div");
+        empty.className = "day empty";
+        empty.setAttribute("aria-hidden", "true");
+        grid.appendChild(empty);
+      }
+
+      const now = new Date();
+      const isNovember2026 = now.getFullYear() === year && now.getMonth() === month;
+
+      for (let date = 1; date <= daysInMonth; date++) {
+        const weekday = new Date(year, month, date).getDay();
+        const isSunday = weekday === 0;
+        const isToday = isNovember2026 && now.getDate() === date;
+        const isHoliday = date === 1; // Tutti i Santi: festa nazionale italiana
+
+        const card = document.createElement("article");
+        card.className = "day";
+        if (isSunday) card.classList.add("sunday");
+        if (isHoliday) card.classList.add("holiday");
+        if (isToday) card.classList.add("today");
+
+        const dateRow = document.createElement("div");
+        dateRow.className = "date-row";
+
+        const number = document.createElement("span");
+        number.className = "date-number";
+        number.textContent = date;
+
+        const todayLabel = document.createElement("span");
+        todayLabel.className = "today-label";
+        todayLabel.textContent = "Oggi";
+
+        dateRow.append(number, todayLabel);
+
+        const names = document.createElement("div");
+        names.className = "names";
+        names.setAttribute("aria-label", "Persone assegnate");
+
+        assignments[date].forEach(person => {
+          const name = document.createElement("span");
+          name.className = "name";
+          name.textContent = person;
+          names.appendChild(name);
+        });
+
+        card.appendChild(dateRow);
+        card.appendChild(names);
+
+        if (celebrations[date]) {
+          const celebration = document.createElement("div");
+          celebration.className = "celebration";
+          celebration.textContent = celebrations[date];
+          card.appendChild(celebration);
+        }
+
+        if (isToday) {
+          card.setAttribute("aria-current", "date");
+        }
+
+        grid.appendChild(card);
+      }
+    }
+
+    renderCalendar();
+
+    // Aggiorna il contrassegno "Oggi" quando la pagina torna in primo piano.
+    document.addEventListener("visibilitychange", () => {
+      if (!document.hidden) renderCalendar();
+    });
+    window.addEventListener("focus", renderCalendar);
+  </script>
+</body>
+</html>
