@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="it">
 <head>
@@ -8,12 +9,7 @@
   <title>Servizio Cucina – Novembre 2026</title>
   <meta name="description" content="Calendario dei turni del servizio cucina della comunità FSMI per novembre 2026.">
 
-  <!--
-    SOCIAL PREVIEW:
-    After publishing on GitHub Pages, replace the placeholder URL below
-    with the full public URL of your preview image (1200 x 630 px).
-    Example: https://USERNAME.github.io/REPOSITORY/preview.png
-  -->
+  <!-- SOCIAL PREVIEW: replace with your GitHub Pages image URL -->
   <meta property="og:type" content="website">
   <meta property="og:locale" content="it_IT">
   <meta property="og:title" content="Servizio Cucina – Novembre 2026">
@@ -368,7 +364,7 @@
       .observance-list { font-size: .7rem; }
     }
 
-    /* Phone list layout: keeps the dates in chronological order and readable. */
+    /* Phone list layout */
     @media (max-width: 480px) {
       body { padding: 7px; }
       .hero { padding: 21px 18px; }
@@ -538,8 +534,8 @@
       25: ["Reymark", "Gerald"],
       26: ["Martin", "Joshua"],
       27: ["Harold", "Gerald"],
-      28: ["Reymark", "Joshua"],
-      29: ["Martin", "Rico", "Harold"],
+      28: ["Reymark", "Rico"],
+      29: ["Martin", "Joshua", "Harold"],
       30: ["Reymark", "Gerald"]
     };
 
@@ -557,12 +553,11 @@
     const year = 2026;
     const month = 10; // Novembre: gennaio = 0
     const daysInMonth = new Date(year, month + 1, 0).getDate();
-    const firstWeekday = new Date(year, month, 1).getDay(); // Domenica = 0
+    const firstWeekday = new Date(year, month, 1).getDay();
 
     function renderCalendar() {
       grid.innerHTML = "";
 
-      // Celle vuote prima del primo giorno del mese.
       for (let i = 0; i < firstWeekday; i++) {
         const empty = document.createElement("div");
         empty.className = "day empty";
@@ -571,16 +566,18 @@
       }
 
       const now = new Date();
-      const isNovember2026 = now.getFullYear() === year && now.getMonth() === month;
+      const isNovember2026 =
+        now.getFullYear() === year && now.getMonth() === month;
 
       for (let date = 1; date <= daysInMonth; date++) {
         const weekday = new Date(year, month, date).getDay();
         const isSunday = weekday === 0;
         const isToday = isNovember2026 && now.getDate() === date;
-        const isHoliday = date === 1; // Tutti i Santi: festa nazionale italiana
+        const isHoliday = date === 1;
 
         const card = document.createElement("article");
         card.className = "day";
+
         if (isSunday) card.classList.add("sunday");
         if (isHoliday) card.classList.add("holiday");
         if (isToday) card.classList.add("today");
@@ -629,10 +626,10 @@
 
     renderCalendar();
 
-    // Aggiorna il contrassegno "Oggi" quando la pagina torna in primo piano.
     document.addEventListener("visibilitychange", () => {
       if (!document.hidden) renderCalendar();
     });
+
     window.addEventListener("focus", renderCalendar);
   </script>
 </body>
