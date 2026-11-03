@@ -1,15 +1,19 @@
-
 <!DOCTYPE html>
 <html lang="it">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#12345a">
+  <meta name="theme-color" content="#ffffff">
 
   <title>Servizio Cucina – Novembre 2026</title>
   <meta name="description" content="Calendario dei turni del servizio cucina della comunità FSMI per novembre 2026.">
 
-  <!-- SOCIAL PREVIEW: replace with your GitHub Pages image URL -->
+  <!--
+    SOCIAL PREVIEW:
+    After publishing on GitHub Pages, replace the placeholder URL below
+    with the full public URL of your preview image (1200 x 630 px).
+    Example: https://USERNAME.github.io/REPOSITORY/preview.png
+  -->
   <meta property="og:type" content="website">
   <meta property="og:locale" content="it_IT">
   <meta property="og:title" content="Servizio Cucina – Novembre 2026">
@@ -65,28 +69,32 @@
 
     .hero {
       position: relative;
+      overflow: hidden;
       padding: 30px 34px 27px;
-      color: white;
-      background: linear-gradient(125deg, var(--navy-deep), var(--navy) 62%, #1c5d8b);
+      color: var(--navy);
+      background:
+        radial-gradient(circle at 94% 18%, rgba(74,174,232,.10), transparent 150px),
+        linear-gradient(120deg, #ffffff 0%, #ffffff 68%, #f7fbff 100%);
+      border-bottom: 1px solid #e8f1f8;
     }
 
     .hero::after {
       content: "";
       position: absolute;
-      width: 220px;
-      height: 220px;
-      right: -55px;
-      top: -115px;
-      border: 1px solid rgba(255,255,255,.13);
+      width: 190px;
+      height: 190px;
+      right: -42px;
+      top: -105px;
+      border: 1px solid rgba(22,131,198,.16);
       border-radius: 50%;
-      box-shadow: 0 0 0 22px rgba(255,255,255,.035),
-                  0 0 0 45px rgba(255,255,255,.025);
+      box-shadow: 0 0 0 17px rgba(22,131,198,.035),
+                  0 0 0 36px rgba(22,131,198,.025);
       pointer-events: none;
     }
 
     .eyebrow {
       margin: 0 0 8px;
-      color: #c5e8ff;
+      color: var(--blue);
       font-family: Arial, sans-serif;
       font-size: .72rem;
       font-weight: 700;
@@ -98,6 +106,7 @@
       position: relative;
       z-index: 1;
       margin: 0;
+      color: var(--navy);
       font-size: clamp(2rem, 5vw, 3.2rem);
       font-weight: 600;
       letter-spacing: .025em;
@@ -108,7 +117,7 @@
       position: relative;
       z-index: 1;
       margin: 11px 0 0;
-      color: #e1f2ff;
+      color: #718096;
       font-family: Arial, sans-serif;
       font-size: .95rem;
       letter-spacing: .04em;
@@ -119,7 +128,7 @@
       z-index: 1;
       right: 34px;
       bottom: 27px;
-      color: rgba(255,255,255,.9);
+      color: rgba(22,131,198,.55);
       font-size: 2rem;
     }
 
@@ -364,7 +373,7 @@
       .observance-list { font-size: .7rem; }
     }
 
-    /* Phone list layout */
+    /* Phone list layout: keeps the dates in chronological order and readable. */
     @media (max-width: 480px) {
       body { padding: 7px; }
       .hero { padding: 21px 18px; }
@@ -488,22 +497,26 @@
           <div class="info-panel">
             <h2>Distribuzione dei turni</h2>
             <div class="counts">
-              <div class="count"><strong>11</strong><span>Martin</span></div>
-              <div class="count"><strong>11</strong><span>Reymark</span></div>
-              <div class="count"><strong>11</strong><span>Rico</span></div>
-              <div class="count"><strong>10</strong><span>Joshua</span></div>
-              <div class="count"><strong>11</strong><span>Harold</span></div>
-              <div class="count"><strong>11</strong><span>Gerald</span></div>
+              
+<div class="count"><strong>11</strong><span>Martin</span></div>
+<div class="count"><strong>11</strong><span>Reymark</span></div>
+<div class="count"><strong>11</strong><span>Rico</span></div>
+<div class="count"><strong>11</strong><span>Joshua</span></div>
+<div class="count"><strong>11</strong><span>Harold</span></div>
+<div class="count"><strong>10</strong><span>Gerald</span></div>
+
             </div>
 
             <h2 style="margin-top:18px;">Turni domenicali</h2>
             <div class="counts">
-              <div class="count"><strong>2</strong><span>Martin</span></div>
-              <div class="count"><strong>2</strong><span>Reymark</span></div>
-              <div class="count"><strong>3</strong><span>Rico</span></div>
-              <div class="count"><strong>2</strong><span>Joshua</span></div>
-              <div class="count"><strong>3</strong><span>Harold</span></div>
-              <div class="count"><strong>3</strong><span>Gerald</span></div>
+              
+<div class="count"><strong>2</strong><span>Martin</span></div>
+<div class="count"><strong>3</strong><span>Reymark</span></div>
+<div class="count"><strong>3</strong><span>Rico</span></div>
+<div class="count"><strong>2</strong><span>Joshua</span></div>
+<div class="count"><strong>3</strong><span>Harold</span></div>
+<div class="count"><strong>2</strong><span>Gerald</span></div>
+
             </div>
           </div>
         </section>
@@ -516,38 +529,40 @@
   <script>
     "use strict";
 
-    const assignments = {
-      1:  ["Rico", "Harold", "Martin"],
-      2:  ["Joshua", "Reymark"],
-      3:  ["Martin", "Gerald"],
-      4:  ["Rico", "Harold"],
-      5:  ["Reymark", "Gerald"],
-      6:  ["Martin", "Harold"],
-      7:  ["Rico", "Joshua"],
-      8:  ["Reymark", "Harold", "Gerald"],
-      9:  ["Martin", "Joshua"],
-      10: ["Reymark", "Rico"],
-      11: ["Joshua", "Harold"],
-      12: ["Martin", "Rico"],
-      13: ["Reymark", "Gerald"],
-      14: ["Martin", "Harold"],
-      15: ["Rico", "Joshua", "Gerald"],
-      16: ["Reymark", "Harold"],
-      17: ["Rico", "Joshua"],
-      18: ["Martin", "Gerald"],
-      19: ["Reymark", "Joshua"],
-      20: ["Rico", "Gerald"],
-      21: ["Martin", "Harold"],
-      22: ["Reymark", "Rico", "Gerald"],
-      23: ["Joshua", "Harold"],
-      24: ["Martin", "Rico"],
-      25: ["Reymark", "Gerald"],
-      26: ["Martin", "Joshua"],
-      27: ["Harold", "Gerald"],
-      28: ["Reymark", "Rico"],
-      29: ["Martin", "Joshua", "Harold"],
-      30: ["Reymark", "Gerald"]
-    };
+    
+const assignments = {
+  1:  ["Rico", "Harold", "Martin"],
+  2:  ["Joshua", "Reymark"],
+  3:  ["Martin", "Rico"],
+  4:  ["Joshua", "Harold"],
+  5:  ["Martin", "Reymark"],
+  6:  ["Rico", "Harold"],
+  7:  ["Martin", "Joshua"],
+  8:  ["Reymark", "Rico", "Harold"],
+  9:  ["Martin", "Joshua"],
+  10: ["Rico", "Harold"],
+  11: ["Reymark", "Gerald"],
+  12: ["Martin", "Rico"],
+  13: ["Reymark", "Gerald"],
+  14: ["Martin", "Rico"],
+  15: ["Joshua", "Harold", "Gerald"],
+  16: ["Reymark", "Rico"],
+  17: ["Joshua", "Gerald"],
+  18: ["Reymark", "Rico"],
+  19: ["Joshua", "Harold"],
+  20: ["Martin", "Gerald"],
+  21: ["Joshua", "Harold"],
+  22: ["Martin", "Reymark", "Gerald"],
+  23: ["Joshua", "Harold"],
+  24: ["Reymark", "Gerald"],
+  25: ["Martin", "Joshua"],
+  26: ["Harold", "Gerald"],
+  27: ["Reymark", "Rico"],
+  28: ["Harold", "Gerald"],
+  29: ["Reymark", "Rico", "Joshua"],
+  30: ["Martin", "Gerald"]
+};
+
 
     const celebrations = {
       1:  "Tutti i Santi",
